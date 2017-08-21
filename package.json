@@ -1,7 +1,7 @@
 {
     "name": "text-compact",
     "displayName": "text-compact",
-    "description": "compace & clear all of \r\n ",
+    "description": "compact & clear all of \r\n ",
     "version": "0.0.1",
     "publisher": "jsonchou",
     "Keywords": "compace & clear & remove all of \r\n ",
@@ -26,7 +26,7 @@
     ],
     "activationEvents": [
         "onCommand:extension.textCompact",
-        "onLanguage:txt"
+        "onLanguage:plaintext"
     ],
     "main": "./extension",
     "contributes": {
@@ -65,7 +65,7 @@
             {
                 "command": "extension.textCompact",
                 "key": "shift+alt+f",
-                "when": "editorTextFocus && editorLangId == txt"
+                "when": "editorTextFocus && editorLangId == plaintext"
             }
         ],
         "commands": [

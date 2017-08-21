@@ -7,18 +7,32 @@ var vscode = require('vscode');
 //var window = vscode.window;
 var commands = vscode.commands;
 
-console.log(1111);
+var _getLongest = (arr) => {
+    var len = 0;
+    let key = 0;
+    var res = '';
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].length > len) {
+            res = arr[i];
+            len = arr[i].length;
+            key = i;
+        }
+    }
+    return { k: key, v: res };
+}
+
 
 //unit event
 var _unitEvt = function() {
     var config = vscode.workspace.getConfiguration('textCompact');
     var editor = vscode.editor || vscode.window.activeTextEditor;
     var doc = editor.document;
+
     if (!editor) {
         return;
     }
 
-    if (!doc || doc.languageId !== 'txt') {
+    if (!doc || doc.languageId !== 'plaintext') {
         return;
     }
 
@@ -27,29 +41,33 @@ var _unitEvt = function() {
     var range = new vscode.Range(start, end);
     var content = doc.getText(range);
 
-    console.log(config);
+    var res = content.replace(/(\r\n)/g, ' ').replace(/(\n)/g, ' ').replace(/(\r)/g, ' ').replace(/\s+/g, ' ').replace(/ /g, '|');
 
-    var res = content
-        .replace(/(\r\n)/g, ' ')
-        .replace(/(\n)/g, ' ')
-        .replace(/(\r)/g, ' ')
-        .replace(/\s+/g, ' ')
+    let resArr = res.split('|');
 
-    //使用|分割所有
-    .replace(/ /g, '|')
+    let longObj = _getLongest(resArr);
 
     //包裹每一块
-    .replace(/\|/g, config.WordSuffix + config.WordPrefix);
+    let resFix = resArr.join('|').replace(/\|/g, config.WordSuffix + ',' + config.WordPrefix);
+
+    resFix = config.WordPrefix + resFix + config.WordSuffix;
+
+    //检查最长字符
 
     // suffix prefix
-    res = config.StreamPrefix + res + config.StreamSuffix
+    resFix = config.StreamPrefix + resFix + config.StreamSuffix;
 
-    if (res) {
+    resFix += `
+    \r=========================================\r
+    最长字符：【${longObj.v}】，所在位置索引：【${longObj.k}】\r
+    每个单词前缀：【${config.WordPrefix}】，后缀为：【${config.WordSuffix}】\r
+    内容前缀：【${config.StreamPrefix}】，后缀为：【${config.StreamSuffix}】\r
+    =========================================\r`
 
+    if (resFix) {
         editor.edit(function(edit) {
-            edit.replace(range, res);
+            edit.replace(range, resFix);
         });
-
     }
 
     // Display a message box to the user
