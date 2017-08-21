@@ -1,0 +1,90 @@
+{
+    "name": "text-compact",
+    "displayName": "text-compact",
+    "description": "compace & clear all of \r\n ",
+    "version": "0.0.1",
+    "publisher": "jsonchou",
+    "Keywords": "compace & clear & remove all of \r\n ",
+    "author": {
+        "name": "jsonchou",
+        "url": "https://github.com/jsonchou"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jsonchou/textCompact.git"
+    },
+    "bugs": {
+        "url": "https://github.com/jsonchou/textCompact/issues",
+        "email": "jsonchou@outlook.com"
+    },
+    "icon": "name.jpg",
+    "engines": {
+        "vscode": "^1.15.0"
+    },
+    "categories": [
+        "Formatters"
+    ],
+    "activationEvents": [
+        "onCommand:extension.textCompact",
+        "onLanguage:txt"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "text compact",
+            "properties": {
+                "textCompact.Author": {
+                    "type": "string",
+                    "default": "jsonchou",
+                    "description": "author description"
+                },
+                "textCompact.WordPrefix": {
+                    "type": "string",
+                    "default": "('",
+                    "description": "word prefix description"
+                },
+                "textCompact.WordSuffix": {
+                    "type": "string",
+                    "default": "')",
+                    "description": "word suffix description"
+                },
+                "textCompact.StreamPrefix": {
+                    "type": "string",
+                    "default": "insert into tb(name) values ",
+                    "description": "stream prefix description"
+                },
+                "textCompact.StreamSuffix": {
+                    "type": "string",
+                    "default": "",
+                    "description": "stream suffix description"
+                }
+            }
+        },
+        "keybindings": [
+            {
+                "command": "extension.textCompact",
+                "key": "shift+alt+f",
+                "when": "editorTextFocus && editorLangId == txt"
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.textCompact",
+                "title": "textCompact"
+            }
+        ]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "eslint": "^3.6.0",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}
