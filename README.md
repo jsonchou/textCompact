@@ -14,14 +14,35 @@ compace & clear all of \r\n
 
 * add prefix/suffix to your word stream
 
-* **add wechat mini program wxss format**
+
+## Settings
+
+copy this to ur user setting files
+
+// word prefix
+"textCompact.WordPrefix": "('",
+
+// word suffix
+"textCompact.WordSuffix": "')",
+
+// stream prefix
+"textCompact.StreamPrefix": "insert into tb(name) values ",
+
+// stream suffix
+"textCompact.StreamSuffix": "",
+
 
 ## Examples
 
+### default
 
 
 
 ## Release Notes
+
+### 0.0.2
+
+remove eslint recommendation
 
 ### 0.0.1
 
