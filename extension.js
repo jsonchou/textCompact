@@ -58,11 +58,11 @@ var _unitEvt = function() {
     resFix = config.StreamPrefix + resFix + config.StreamSuffix;
 
     resFix += `
-    \r=========================================\r
-    最长字符：【${longObj.v}】，所在位置索引：【${longObj.k}】\r
-    每个单词前缀：【${config.WordPrefix}】，后缀为：【${config.WordSuffix}】\r
-    内容前缀：【${config.StreamPrefix}】，后缀为：【${config.StreamSuffix}】\r
-    =========================================\r`
+    ${os.EOL}=========================================${os.EOL}
+    最长字符：【${longObj.v}】，所在位置索引：【${longObj.k}】${os.EOL}
+    每个单词前缀：【${config.WordPrefix}】，后缀为：【${config.WordSuffix}】${os.EOL}
+    内容前缀：【${config.StreamPrefix}】，后缀为：【${config.StreamSuffix}】${os.EOL}
+    =========================================${os.EOL}`
 
     if (resFix) {
         editor.edit(function(edit) {
